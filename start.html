@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>起始页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #000000, #1e1e1e);
+            color: #fff;
+        }
+
+        /* 起始页 */
+        .splash-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(bg.png);
+            color: #fff;
+            width: 100%;
+            height: 100%;
+        }
+
+        .splash-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            text-align: center;
+            padding: 2rem 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            background: #2525268e;
+
+            overflow-y: auto;
+            /* 允许垂直滚动 */
+        }
+
+        /* 隐藏滚动条样式 */
+        .splash-content::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .splash-header {
+            margin-bottom: 2rem;
+        }
+
+        .splash-header i {
+            color: #0e639c;
+        }
+
+        .splash-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            margin-bottom: 20px;
+            gap: 40px;
+            /* 卡片之间的间距 */
+            justify-content: center;
+            /* 居中对齐 */
+            padding: 20px 30px 0;
+            /* 上20px，左右30px，下10px */
+
+        }
+
+        .splash-card {
+            background: #1e1e1e;
+            padding: 20px 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.655);
+            text-align: left;
+            transition: transform 0.2s, box-shadow 0.2s;
+
+        }
+
+        .splash-card p {
+            margin: 10px 10px;
+
+        }
+
+        .splash-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(7, 187, 211, 0.884);
+        }
+
+        /* 添加渐变边框动画 */
+        .splash-card:hover {
+            animation: gradient-border 5s linear infinite;
+            /* 开启渐变动画 */
+        }
+
+        /* 底部版权样式 */
+        .footer {
+            padding: 40px 40px 0;
+        }
+
+        .footer-content p {
+            padding: 20px 0 0;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 起始页隐藏时的动画 */
+        .splash-screen.hidden {
+            transform: scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gradient-border {
+            0% {
+                border-color: #333;
+            }
+
+            50% {
+                border-color: #0e639c;
+            }
+
+            100% {
+                border-color: #333;
+            }
+        }
+
+        .card-icon {
+            font-size: 2em;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: rgba(14, 99, 156, 0.1);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .splash-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #0e639c;
+        }
+
+        .splash-card ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .splash-card li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+
+        }
+
+        /* 结构卡片优化 */
+        .structure-diagram {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .structure-item {
+            flex: 1;
+            background: #252526;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-align: center;
+            line-height: 1.4;
+            white-space: nowrap;
+            /* 禁止文字换行 */
+            overflow: hidden;
+            /* 隐藏溢出的文字 */
+        }
+
+        .structure-item1 {
+            flex: 1;
+            background: #252526;
+            padding: 20px 12px 20px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-align: center;
+            line-height: 1.4;
+            white-space: nowrap;
+            /* 禁止文字换行 */
+            overflow: hidden;
+            /* 隐藏溢出的文字 */
+        }
+
+        .structure-arrow {
+            color: #0e639c;
+            font-size: 1.2em;
+            padding: 0 5px;
+        }
+
+        .skip-btn {
+            background: #0e639c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin: 50px auto 0;
+            text-decoration: none;
+            display: block;
+            width: max-content;
+        }
+
+        .skip-btn:hover {
+            background: #00a149;
+        }
+
+        .skip-btn i {
+            margin-right: 8px;
+        }
+
+        /* 设置链接颜色 */
+        .custom-link {
+            color: #ffffff;
+            /* 修改为你想要的颜色，比如蓝色 */
+            text-decoration: none;
+            /* 去掉下划线 */
+            transition: color 0.3s ease;
+            /* 平滑过渡效果 */
+        }
+
+        /* 设置链接悬停颜色 */
+        .custom-link:hover {
+            color: #0e639c;
+            /* 悬停时的颜色 */
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .splash-header h1 {
+                font-size: 18px;
+                /* 缩小标题文字 */
+            }
+
+            .card-icon i {
+                font-size: 1.5rem;
+                /* 缩小图标大小 */
+            }
+
+            .splash-card h3 {
+                font-size: 14px;
+                /* 缩小卡片标题 */
+            }
+
+            .splash-card li {
+                font-size: 12px;
+                /* 缩小列表文字 */
+            }
+
+            .footer p {
+                font-size: 12px;
+                /* 缩小底部文字 */
+            }
+
+            .skip-btn {
+                padding: 10px 15px;
+                /* 移动端内边距 */
+                font-size: 12px;
+                /* 移动端字体大小 */
+                margin: 20px auto 0;
+                /* 移动端居中 */
+            }
+        }
+    </style>
+
+<body>
+    <!-- 起始页框架 -->
+    <div class="splash-content">
+        <header class="splash-header">
+            <img src="logo.png" alt="Logo Image" width="100" height="100">
+            <h1>欢迎使用WebDev网页开发工具</h1>
+        </header>
+
+        <main class="splash-cards">
+            <!-- 功能卡片 -->
+            <article class="splash-card">
+                <div class="card-icon"><i class="fas fa-wrench"></i></div>
+                <h3>核心功能</h3>
+                <ul>
+                    <li><i class="fas fa-folder-open"></i> 项目管理</li>
+                    <li><i class="fas fa-file-code"></i> 实时代码编辑</li>
+                    <li><i class="fas fa-mobile-alt"></i> 多设备预览</li>
+                </ul>
+            </article>
+
+            <!-- 结构卡片 -->
+            <article class="splash-card">
+                <div class="card-icon"><i class="fas fa-sitemap"></i></div>
+                <h3>界面结构</h3>
+                <div class="structure-item">工具栏</div>
+                <div class="structure-diagram">
+                    <div class="structure-item1">文件管理</div>
+                    <div class="structure-item1">代码编辑</div>
+                    <div class="structure-item1">实时预览</div>
+                </div>
+            </article>
+
+            <!-- 关于卡片 -->
+            <article class="splash-card about-card">
+                <div class="card-icon"><i class="fas fa-info-circle"></i></div>
+                <h3>关于应用</h3>
+                <p>版本: 2.1.1</p>
+                <p>作者: Hillmis</p>
+                <p>官网:
+                    <a href="https://iu13.fun" target="_blank" rel="noopener noreferrer" aria-label="官网"
+                        class="custom-link">
+                        liu13.fun
+                    </a>
+                </p>
+            </article>
+        </main>
+
+        <a href="index.html" target="_blank" rel="noopener noreferrer" class="skip-btn" aria="进入web dev">
+            <i class="fas fa-forward"></i> 立即开始
+        </a>
+        <!-- 底部 -->
+        <div class="footer">
+            <div class="footer-content">
+                <p>- 天若有情天亦老，人间正道是沧桑 -</p>
+                <p>Copyrights © 2025 Hillmis All rights reserved 联系邮箱: hillmis@qq.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
