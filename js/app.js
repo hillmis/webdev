@@ -5,13 +5,7 @@ class App {
             this.initializePanelToggles();
             this.initializeTabSwitching();
             this.initializeToolbarButtons();
-            this.initializePanels();
             console.log('web dev 已初始化');
-        });
-
-        // 处理窗口大小调整
-        window.addEventListener('resize', () => {
-            this.handleResize();
         });
     }
 
@@ -162,16 +156,6 @@ class App {
             alert('导入失败: ' + error.message);
         }
 
-    }
-    initializeContextMenu() {
-
-    }
-
-    handleResize() {
-        // 触发 Monaco 编辑器布局更新
-        if (window.editor && window.editor.editor) {
-            window.editor.editor.layout();
-        }
     }
 
     initializeToolbarButtons() {
@@ -438,45 +422,6 @@ class App {
     }
 }
 
-function initResizers() {
-    const bottomPanel = document.querySelector('.bottom-panel');
-    const resizer = bottomPanel.querySelector('.resizer.top');
-    let isDragging = false;
-    const sensitivityFactor = 0.8; // 调整此值可改变灵敏度
-
-    resizer.addEventListener('mousedown', initDrag);
-
-    function initDrag(e) {
-        isDragging = true;
-        const startY = e.clientY;
-        const startHeight = parseInt(document.defaultView.getComputedStyle(bottomPanel).height, 10);
-
-        document.documentElement.addEventListener('mousemove', doDrag);
-        document.documentElement.addEventListener('mouseup', stopDrag);
-
-        function doDrag(e) {
-            if (!isDragging) return;
-            const deltaY = (startY - e.clientY) * sensitivityFactor; // 应用灵敏度因子
-            const newHeight = startHeight + deltaY;
-
-            // 应用最小和最大高度限制
-            const minHeight = 50;
-            const maxHeight = window.innerHeight * 0.8;
-
-            bottomPanel.style.height = Math.max(minHeight, Math.min(maxHeight, newHeight)) + 'px';
-        }
-
-        function stopDrag() {
-            isDragging = false;
-            document.documentElement.removeEventListener('mousemove', doDrag);
-            document.documentElement.removeEventListener('mouseup', stopDrag);
-        }
-    }
-}
-
-
-// 在 DOM 加载完成后调用
-document.addEventListener('DOMContentLoaded', initResizers);
 // 初始化应用
 window.app = new App();
 // 禁用右键菜单
