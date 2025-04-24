@@ -35,7 +35,7 @@ WebDev 是一个功能全面的网页开发工具，旨在为开发者提供高�
 克隆项目仓库：
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/hillmis/webdev.git
 ```
 
 导航到项目目录：
