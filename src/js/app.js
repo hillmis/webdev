@@ -324,43 +324,64 @@ class App {
         const modal = document.createElement('div');
         modal.className = 'settings-modal';
         modal.innerHTML = `
-            <div class="settings-content">
-                <div class="settings-header">
-                    <h2>设置</h2>
-                    <button class="close-settings">&times;</button>
-                </div>
-                <div class="settings-body">
-                    <div class="settings-section">
-                        <h3>编辑器</h3>
-                        <div class="setting-item">
-                            <label for="editor-theme">主题:</label>
-                            <select id="editor-theme">
-                                <option value="vs-dark">深色</option>
-                                <option value="vs">浅色</option>
-                                <option value="hc-black">高对比度</option>
-                            </select>
-                        </div>
-                        <div class="setting-item">
-                            <label for="editor-font-size">字体大小:</label>
-                            <input type="number" id="editor-font-size" min="10" max="30" value="14">
-                        </div>
+  <div class="settings-content">
+    <div class="settings-header">
+        <h2>设置</h2>
+        <button class="close-settings">&times;</button>
+    </div>
+    <div class="settings-body">
+        <div class="settings-section">
+            <h3>编辑器</h3>
+            <div class="setting-item">
+                <label for="editor-theme">主题:</label>
+                <select id="editor-theme">
+                    <option value="vs-dark">深色</option>
+                    <option value="vs">浅色</option>
+                    <option value="hc-black">高对比度</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label for="editor-font-size">字体大小:</label>
+                <input type="number" id="editor-font-size" min="10" max="30" value="14">
+            </div>
+             <div class="setting-item">
+                <label>版本:</label>
+                <a href="https://cdn.jsdelivr.net/npm/monaco-editor@0.40.0/min/vs/" target="_blank" style="display: flex; align-items: center; color: var(--text-color);text-decoration: none;">
+                monaco-editor-0.40.0
+                </a>
+            </div>
+        </div>
+        <div class="settings-section">
+            <h3>应用</h3>
+            <div class="setting-item">
+                <label for="language-select">语言:</label>
+                <select id="language-select">
+                    <option value="en">英文</option>
+                    <option value="zh">中文</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>GitHub 仓库:</label>
+                <a href="https://github.com/hillmis/webdev" target="_blank" style="display: flex; align-items: center; color: var(--text-color);text-decoration: none;">
+                    <i class="fab fa-github" style="font-size: 1.2em; margin-right: 8px;"></i>
+                   
+                </a>
+            </div>
+            <div class="setting-item">
+                <label>作者:</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="flex: 1;">
+                        <p style="margin: 0; font-size: 0.9em;"><a href="https://iu13.fun" target="_blank" style="color: var(--text-color);text-decoration: none;">hillmis</a></p>
                     </div>
-                    <div class="settings-section">
-                        <h3>应用</h3>
-                        <div class="setting-item">
-                            <label for="language-select">语言:</label>
-                            <select id="language-select">
-                                <option value="en">英文</option>
-                                <option value="zh">中文</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="settings-footer">
-                    <button class="save-settings">保存</button>
-                    <button class="cancel-settings">取消</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="settings-footer">
+        <button class="save-settings">保存</button>
+        <button class="cancel-settings">取消</button>
+    </div>
+</div>
         `;
 
         document.body.appendChild(modal);
