@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>web dev</title>
-    <!--  <script src="//cdn.bootcdn.net/ajax/libs/eruda/3.4.1/eruda.js"></script>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>web dev</title>
+  <!--  <script src="//cdn.bootcdn.net/ajax/libs/eruda/3.4.1/eruda.js"></script>
     <script>
       eruda.init({
         useShadowDom: true,
@@ -16,241 +17,230 @@
         },
       });
     </script> -->
-    <script>
-      (function () {
-        if (!localStorage.getItem("hasVisited")) {
-          localStorage.setItem("hasVisited", "true");
-          window.location.href = "start.html";
-        }
-      })();
-    </script>
-     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css "
-    />
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.40.0/min/vs/loader.js"></script>
-  </head>
+  <script>
+    (function () {
+      if (!localStorage.getItem("hasVisited")) {
+        localStorage.setItem("hasVisited", "true");
+        window.location.href = "start.html";
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css " />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
-  <body>
-    <div class="app-container">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <button class="toolbar-btn" title="新建项目" id="new-project">
-            <i class="fas fa-plus"></i>
-          </button>
-          <button
-            class="toolbar-btn"
-            title="从文件夹导入项目"
-            id="import-folder"
-          >
-            <i class="fas fa-folder-open"></i>
-          </button>
-          <button class="toolbar-btn" title="从ZIP导入项目" id="import-zip">
-            <i class="fas fa-file-upload"></i>
-          </button>
-          <button class="toolbar-btn" title="导出项目到ZIP" id="export-zip">
-            <i class="fas fa-file-archive"></i>
-          </button>
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+  <!-- 主题 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+
+  <!-- 核心 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+
+  <!-- 插件 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/search.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/search/searchcursor.js"></script>
+
+  <!-- 语言模式 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/json/json.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.js"></script>
+
+  <!-- 可添加其他需要的语言模式 -->
+</head>
+
+<body>
+  <div class="app-container">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="toolbar-btn" title="新建项目" id="new-project">
+          <i class="fas fa-plus"></i>
+        </button>
+        <button class="toolbar-btn" title="从文件夹导入项目" id="import-folder">
+          <i class="fas fa-folder-open"></i>
+        </button>
+        <button class="toolbar-btn" title="从ZIP导入项目" id="import-zip">
+          <i class="fas fa-file-upload"></i>
+        </button>
+        <button class="toolbar-btn" title="导出项目到ZIP" id="export-zip">
+          <i class="fas fa-file-archive"></i>
+        </button>
+      </div>
+      <div class="toolbar-title">
+        <span class="brand-text brand-left">web</span>
+        <a href="javascript:void(0)" class="logo-link" onclick="location.reload()" aria-label="刷新页面">
+          <img src="logo.png" alt="webdev" class="logo-image" width="120" height="32" />
+        </a>
+        <span class="brand-text brand-right">dev</span>
+      </div>
+      <div class="toolbar-right">
+        <button class="toolbar-btn" id="toggle-file-manager" title="切换文件管理器">
+          <i class="fas fa-folder"></i>
+        </button>
+        <button class="toolbar-btn" id="toggle-preview" title="切换预览">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="toolbar-btn" id="toggle-terminal" title="切换终端">
+          <i class="fas fa-terminal"></i>
+        </button>
+        <button class="toolbar-btn" id="toggle-setting" title="切换设置">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="panel file-manager-panel">
+        <div class="panel-header">
+          <span>文件</span>
+          <div class="panel-actions">
+            <button class="panel-btn" title="导入文件">
+              <i class="fas fa-file"></i>
+            </button>
+            <button class="panel-btn" title="导入文件夹">
+              <i class="fas fa-folder"></i>
+            </button>
+            <button class="panel-btn" title="新建文件">
+              <i class="fas fa-file-circle-plus"></i>
+            </button>
+            <button class="panel-btn" title="新建文件夹">
+              <i class="fas fa-folder-plus"></i>
+            </button>
+            <button class="panel-btn" title="刷新">
+              <i class="fas fa-sync"></i>
+            </button>
+          </div>
         </div>
-        <div class="toolbar-title">
-          <span class="brand-text brand-left">web</span>
-          <a
-            href="javascript:void(0)"
-            class="logo-link"
-            onclick="location.reload()"
-            aria-label="刷新页面"
-          >
-            <img
-              src="logo.png"
-              alt="webdev"
-              class="logo-image"
-              width="120"
-              height="32"
-            />
-          </a>
-          <span class="brand-text brand-right">dev</span>
+        <div class="project-info">
+          <div class="project-name" title="项目名称">未命名项目</div>
+          <div class="current-path" title="当前路径"></div>
         </div>
-        <div class="toolbar-right">
-          <button
-            class="toolbar-btn"
-            id="toggle-file-manager"
-            title="切换文件管理器"
-          >
-            <i class="fas fa-folder"></i>
-          </button>
-          <button class="toolbar-btn" id="toggle-preview" title="切换预览">
-            <i class="fas fa-eye"></i>
-          </button>
-          <button class="toolbar-btn" id="toggle-terminal" title="切换终端">
-            <i class="fas fa-terminal"></i>
-          </button>
-          <button class="toolbar-btn" id="toggle-setting" title="切换设置">
-            <i class="fas fa-cog"></i>
-          </button>
+        <div class="file-explorer">
+          <div class="file-tree"></div>
         </div>
       </div>
 
-      <div class="main-content">
-        <div class="panel file-manager-panel">
-          <div class="panel-header">
-            <span>文件</span>
-            <div class="panel-actions">
-              <button class="panel-btn" title="导入文件">
-                <i class="fas fa-file"></i>
-              </button>
-              <button class="panel-btn" title="导入文件夹">
-                <i class="fas fa-folder"></i>
-              </button>
-              <button class="panel-btn" title="新建文件">
-                <i class="fas fa-file-circle-plus"></i>
-              </button>
-              <button class="panel-btn" title="新建文件夹">
-                <i class="fas fa-folder-plus"></i>
-              </button>
-              <button class="panel-btn" title="刷新">
-                <i class="fas fa-sync"></i>
-              </button>
-            </div>
-          </div>
-          <div class="project-info">
-            <div class="project-name" title="项目名称">未命名项目</div>
-            <div class="current-path" title="当前路径"></div>
-          </div>
-          <div class="file-explorer">
-            <div class="file-tree"></div>
-          </div>
+      <div class="resizer vertical" id="file-editor-resizer"></div>
+
+      <div class="panel editor-panel">
+        <div class="editor-tabs"></div>
+        <div id="CodeMirror-editor"></div>
+        <div class="editor-toolbar">
+          <select class="language-selector" aria-label="编程语言选择器">
+            <option value="javascript">JavaScript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="typescript">TypeScript</option>
+            <option value="python">Python</option>
+            <option value="json">JSON</option>
+          </select>
+          <button class="toolbar-btn" title="查找和替换" id="find-replace">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="toolbar-btn" title="撤销" id="undo">
+            <i class="fas fa-undo"></i>
+          </button>
+          <button class="toolbar-btn" title="重做" id="redo">
+            <i class="fas fa-redo"></i>
+          </button>
+          <button class="toolbar-btn" title="保存" id="save">
+            <i class="fas fa-save"></i>
+          </button>
         </div>
 
-        <div class="resizer vertical" id="file-editor-resizer"></div>
+        <div class="bottom-panel">
+          <div class="resizer top"></div>
+          <div class="panel-tabs">
+            <button class="tab-btn" data-target="terminal">终端</button>
+            <button class="tab-btn" data-target="ai-chat">AI</button>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active" id="terminal">
+              <div class="terminal-container">
+                <div class="terminal-output"></div>
+                <div class="terminal-input-line">
+                  <span class="prompt">$</span>
+                  <input type="text" class="terminal-input" placeholder="输入命令..." />
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="developer_tools">
+              <div class="developer-tools">
+                <div class="developer-tool">
+                  <h3>开发者工具插件</h3>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="ai-chat">
+              <div class="chat-container">
+                <div class="chat-messages"></div>
+                <div class="chat-input-container">
+                  <textarea class="chat-input" placeholder="向 AI 寻求帮助..."></textarea>
+                  <button class="chat-send-btn" title="发送消息">
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <div class="panel editor-panel">
-          <div class="editor-tabs"></div>
-          <div id="monaco-editor"></div>
-          <div class="editor-toolbar">
-            <select class="language-selector" aria-label="编程语言选择器">
-              <option value="javascript">JavaScript</option>
-              <option value="html">HTML</option>
-              <option value="css">CSS</option>
-              <option value="typescript">TypeScript</option>
-              <option value="python">Python</option>
-              <option value="json">JSON</option>
+      <div class="resizer vertical" id="editor-preview-resizer"></div>
+      <div class="panel preview-panel">
+        <div class="panel-header">
+          <input type="text" class="preview-path" placeholder="输入网址或本地路径" spellcheck="false" />
+          <div class="panel-actions">
+            <select class="device-selector" aria-label="设备类型选择器">
+              <option value="responsive">响应式</option>
+              <option value="mobile">手机</option>
+              <option value="tablet">平板</option>
+              <option value="desktop">桌面</option>
             </select>
-            <button class="toolbar-btn" title="查找和替换" id="find-replace">
-              <i class="fas fa-search"></i>
+            <button class="panel-btn" title="切换横竖屏">
+              <i class="fas fa-mobile-alt portrait"></i>
+              <i class="fas fa-mobile-alt landscape"></i>
             </button>
-            <button class="toolbar-btn" title="撤销" id="undo">
-              <i class="fas fa-undo"></i>
+            <button class="panel-btn" title="全屏预览">
+              <i class="fas fa-expand"></i>
             </button>
-            <button class="toolbar-btn" title="重做" id="redo">
-              <i class="fas fa-redo"></i>
+            <button class="panel-btn" title="刷新预览">
+              <i class="fas fa-sync-alt"></i>
             </button>
-            <button class="toolbar-btn" title="保存" id="save">
-              <i class="fas fa-save"></i>
-            </button>
-          </div>
-
-          <div class="bottom-panel">
-            <div class="resizer top"></div>
-            <div class="panel-tabs">
-              <button class="tab-btn" data-target="terminal">终端</button>
-              <button class="tab-btn" data-target="ai-chat">AI</button>
-            </div>
-            <div class="tab-content">
-              <div class="tab-pane active" id="terminal">
-                <div class="terminal-container">
-                  <div class="terminal-output"></div>
-                  <div class="terminal-input-line">
-                    <span class="prompt">$</span>
-                    <input
-                      type="text"
-                      class="terminal-input"
-                      placeholder="输入命令..."
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="developer_tools">
-                <div class="developer-tools">
-                  <div class="developer-tool">
-                    <h3>开发者工具插件</h3>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane" id="ai-chat">
-                <div class="chat-container">
-                  <div class="chat-messages"></div>
-                  <div class="chat-input-container">
-                    <textarea
-                      class="chat-input"
-                      placeholder="向 AI 寻求帮助..."
-                    ></textarea>
-                    <button class="chat-send-btn" title="发送消息">
-                      <i class="fas fa-paper-plane"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-
-        <div class="resizer vertical" id="editor-preview-resizer"></div>
-        <div class="panel preview-panel">
-          <div class="panel-header">
-            <input
-              type="text"
-              class="preview-path"
-              placeholder="输入网址或本地路径"
-              spellcheck="false"
-            />
-            <div class="panel-actions">
-              <select class="device-selector" aria-label="设备类型选择器">
-                <option value="responsive">响应式</option>
-                <option value="mobile">手机</option>
-                <option value="tablet">平板</option>
-                <option value="desktop">桌面</option>
-              </select>
-              <button class="panel-btn" title="切换横竖屏">
-                <i class="fas fa-mobile-alt portrait"></i>
-                <i class="fas fa-mobile-alt landscape"></i>
-              </button>
-              <button class="panel-btn" title="全屏预览">
-                <i class="fas fa-expand"></i>
-              </button>
-              <button class="panel-btn" title="刷新预览">
-                <i class="fas fa-sync-alt"></i>
-              </button>
-            </div>
-          </div>
-          <div class="preview-container" id="preview">
-            <iframe id="preview-frame" src="about:blank"></iframe>
-          </div>
+        <div class="preview-container" id="preview">
+          <iframe id="preview-frame" src="about:blank"></iframe>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="context-menu">
-      <ul>
-        <li data-action="delete"><i class="fas fa-trash"></i> 删除</li>
-        <li data-action="复制"><i class="fas fa-copy"></i> 复制</li>
-        <li data-action="paste"><i class="fas fa-paste"></i> 粘贴</li>
-        <li data-action="copy-path">
-          <i class="fas fa-clipboard"></i> 复制路径
-        </li>
-      </ul>
-    </div>
+  <div class="context-menu">
+    <ul>
+      <li data-action="delete"><i class="fas fa-trash"></i> 删除</li>
+      <li data-action="复制"><i class="fas fa-copy"></i> 复制</li>
+      <li data-action="paste"><i class="fas fa-paste"></i> 粘贴</li>
+      <li data-action="copy-path">
+        <i class="fas fa-clipboard"></i> 复制路径
+      </li>
+    </ul>
+  </div>
 
-    <div class="panel-mask"></div>
-  </body>
+  <div class="panel-mask"></div>
+</body>
 
-  <script src="js/app.js"></script>
-  <script src="js/utils.js"></script>
-  <script src="js/fileManager.js"></script>
-  <script src="js/editor.js"></script>
-  <script src="js/preview.js"></script>
-  <script src="js/terminal.js"></script>
-  <script src="js/aiChat.js"></script>
-  <script src="js/resize.js"></script>
+<script src="js/app.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/fileManager.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/preview.js"></script>
+<script src="js/terminal.js"></script>
+<script src="js/aiChat.js"></script>
+<script src="js/resize.js"></script>
+
 </html>

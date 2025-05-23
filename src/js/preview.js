@@ -246,6 +246,12 @@ class Preview {
             if (!content) return;
         }
 
+        // 更新路径显示
+        const pathInput = document.querySelector('.preview-path');
+        if (pathInput) {
+            pathInput
+                .value = this.currentFilePath || this.previewFrame.src || 'about:blank';
+        }
         const previewFrame = this.previewFrame;
         const previewDoc = previewFrame.contentDocument;
 
@@ -412,11 +418,7 @@ class Preview {
             }
         }
 
-        // 强制重绘
-        setTimeout(() => {
-            this.centerPreviewFrame();
-            this.previewFrame.contentWindow?.dispatchEvent(new Event('resize'));
-        }, 50);
+
     }
     centerPreviewFrame() {
         // 确保在容器内始终居中

@@ -346,8 +346,8 @@ class App {
             </div>
              <div class="setting-item">
                 <label>版本:</label>
-                <a href="https://cdn.jsdelivr.net/npm/monaco-editor@0.40.0/min/vs/" target="_blank" style="display: flex; align-items: center; color: var(--text-color);text-decoration: none;">
-                monaco-editor-0.40.0
+                <a href="https://cdn.jsdelivr.net/npm/CodeMirror-editor@0.40.0/min/vs/" target="_blank" style="display: flex; align-items: center; color: var(--text-color);text-decoration: none;">
+                CodeMirror-editor-0.40.0
                 </a>
             </div>
         </div>
@@ -403,7 +403,7 @@ class App {
 
             // 应用设置
             if (window.editor && window.editor.editor) {
-                monaco.editor.setTheme(theme);
+                CodeMirror.editor.setTheme(theme);
                 window.editor.editor.updateOptions({ fontSize });
             }
 

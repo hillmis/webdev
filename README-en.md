@@ -19,7 +19,7 @@ WebDev is an integrated web development environment designed for developers. It 
 ## Tech Stack
 
 - **Front - end technologies**: Built with HTML, CSS, and JavaScript without additional framework dependencies.
-- **Code editor**: Uses Monaco Editor, the core of VS Code.
+- **Code editor**: Uses CodeMirror Editor, the core of VS Code.
 - **File storage**: Uses IndexedDB for local file storage and supports drag - and - drop operations.
 - **Compression and decompression**: Uses JSZip library for ZIP file import and export.
 - **Debugging tools**: Integrates Eruda for mobile debugging.
